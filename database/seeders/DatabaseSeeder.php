@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Product;
 use App\Models\ProductCategory;
 use App\Models\User;
 use Illuminate\Database\Seeder;
@@ -15,7 +16,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        User::created([
+        User::create([
             'name' => 'Eric Prasetya',
             'username' => 'ericprasetya',
             'email' => 'eric.sentosa888@gmail.com',
@@ -24,16 +25,22 @@ class DatabaseSeeder extends Seeder
         User::factory(3)->create();
 
         ProductCategory::create([
-            'name' => 'Elektronik'
+            'name' => 'Elektronik',
+            'slug' => 'elektronik',
         ]);
         ProductCategory::create([
-            'name' => 'Alat Dapur'
+            'name' => 'Alat Dapur',
+            'slug' => 'alat-dapur',
         ]);
         ProductCategory::create([
-            'name' => 'Alat Olahraga'
-        ]);
+            'name' => 'Alat Olahraga',
+            'slug' => 'alat-olahraga'
+        ]); 
         ProductCategory::create([
-            'name' => 'Fashion'
+            'name' => 'Fashion',
+            'slug' => 'fashion'
         ]);
+        
+        Product::factory(10)->create();
     }
 }

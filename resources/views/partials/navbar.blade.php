@@ -47,16 +47,9 @@
 </nav>
 
 <ul class="nav justify-content-evenly pb-2 bg-tosca" style="padding-top: 110px;">
+  @foreach ($categories as $category)
   <li class="nav-item">
-    <a class="nav-link btn btn-outline-secondary text-dark rounded-pill d-inline-block p-1" style="width: 200px;" href="#">Elektronik</a>
+    <a class="nav-link btn btn-outline-secondary text-dark rounded-pill d-inline-block p-1" style="width: 200px;" href="/products?={{ $category->slug }}">{{ $category->name }}</a>
   </li>
-  <li class="nav-item">
-    <a class="nav-link btn btn-outline-secondary text-dark rounded-pill d-inline-block p-1" style="width: 200px;" href="#">Alat Olahraga</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link btn btn-outline-secondary text-dark rounded-pill d-inline-block p-1" style="width: 200px;" href="#">Alat Dapur</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link btn btn-outline-secondary text-dark rounded-pill d-inline-block p-1" style="width: 200px;" href="#">Sepatu</a>
-  </li>
+  @endforeach
 </ul>
