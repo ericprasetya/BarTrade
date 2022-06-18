@@ -18,12 +18,16 @@ class UserFactory extends Factory
         $username = explode(" ", $nameTemp);
         $username = implode("", $username);
         $username = Str::lower($username);
-        // dd($username);
+        // $phone = $this->faker->unique()->phoneNumber();
+        // $phone = explode(" ", $phone);
+        // $phone = implode("", $phone);
+        // dd($this->faker->unique()->numerify('628#########'));
 
         return [
             'name' => $nameTemp,
             'username' => $username,
             'email' => $this->faker->unique()->safeEmail(),
+            'phone' => $this->faker->unique()->numerify('628#########'),
             'email_verified_at' => now(),
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
             'remember_token' => Str::random(10),

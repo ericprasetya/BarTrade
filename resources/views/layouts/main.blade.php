@@ -22,7 +22,7 @@
 
     @include('partials.navbar')
 
-    <div class="container-fluid p-0 position-relative">
+    <div class="container-fluid p-0 position-relative overflow-hidden">
         @yield('container')
     </div>
 

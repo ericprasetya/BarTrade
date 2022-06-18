@@ -4,9 +4,9 @@
       <div class="me-3">
         <h5>Support</h5>
         <ul class="nav flex-column">
-          <li class="nav-item mb-1"><a href="#" class="nav-link p-0">Customer Care</a></li>
-          <li class="nav-item mb-1"><a href="#" class="nav-link p-0">Terms and Condition</a></li>
-          <li class="nav-item mb-1"><a href="#" class="nav-link p-0">Frequently Asked Question (FAQ)</a></li>
+          <li class="nav-item mb-1"><a href="#" class="nav-link p-0 text-white">Customer Care</a></li>
+          <li class="nav-item mb-1"><a href="#" class="nav-link p-0 text-white">Terms and Condition</a></li>
+          <li class="nav-item mb-1"><a href="#" class="nav-link p-0 text-white">Frequently Asked Question (FAQ)</a></li>
         </ul>
         <p class="mt-3" style="font-size: 14px">&copy; 2022 BarTrade Indonesia Company. All rights reserved.</p>
       </div>
