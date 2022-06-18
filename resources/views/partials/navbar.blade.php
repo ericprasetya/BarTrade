@@ -1,3 +1,4 @@
+
 <nav class="navbar navbar-expand-lg navbar-dark bg-blue fixed-top" style="height: 100px; box-shadow: 0px 0px 20px 0px rgb(89, 89, 89); border-radius: 0px 0px 20px 20px;">
   <div class="container">
       <a class="navbar-brand" href="/">
@@ -7,9 +8,12 @@
           <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
-          <form class="d-flex" role="search">
+          <form class="d-flex" method="GET" action="/products">
             @csrf
-            <input class="form-control me-2 col-8" type="search" placeholder="Search" aria-label="Search">
+            @if (request('category'))
+              <input type="hidden" name="category" value="{{ request('category') }}">
+            @endif
+            <input class="form-control me-2 col-8" type="search" placeholder="Search" aria-label="Search" name="search" value="{{ request('search') }}">
             <button class="btn btn-outline-success" type="submit">Search</button>
           </form>
           <ul class="navbar-nav ms-auto">
@@ -31,13 +35,13 @@
               </li>
               @else
               <li class="nav-item">
-                <a href="/login" class="nav-link{{ Request::is('login') ? 'active' : '' }}">
-                  <button class="btn btn-success">Login</button>
+                <a href="/login" class="nav-link">
+                  <button class="btn btn-success {{ Request::is('login') ? 'active' : '' }}">Login</button>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="/register" class="nav-link{{ Request::is('register') ? 'active' : '' }}">
-                  <button class=" btn btn-outline-success">Register</button>
+                <a href="/register" class="nav-link">
+                  <button class=" btn btn-outline-success {{ Request::is('register') ? 'active' : '' }}">Register</button>
                 </a>
               </li>
             </ul>
@@ -46,10 +50,12 @@
   </div>
 </nav>
 
-<ul class="nav justify-content-evenly pb-2 bg-tosca" style="padding-top: 110px;">
+<ul class="nav justify-content-evenly pb-2 bg-white border-bottom" style="padding-top: 110px; border-radius: 0px 0px 20px 20px;">
   @foreach ($categories as $category)
   <li class="nav-item">
-    <a class="nav-link btn btn-outline-secondary text-dark rounded-pill d-inline-block p-1" style="width: 200px;" href="/products?={{ $category->slug }}">{{ $category->name }}</a>
+    <a class="nav-link d-inline-block p-1" style="width: 200px;" href="/products?category={{ $category->slug }}">
+      <button class="btn btn-outline-primary w-100 rounded-pill {{ ($categoryName != null) ? (($categoryName === $category->name) ? 'active' : '') : '' }}">{{ $category->name }}</button>
+    </a>
   </li>
   @endforeach
 </ul>

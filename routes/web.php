@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ProductController;
 use App\Models\ProductCategory;
 use Illuminate\Support\Facades\Route;
 
@@ -16,6 +17,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('home',[
-        "categories" => ProductCategory::all()
+        "categories" => ProductCategory::all(),
+        "categoryName" => ""
     ]);
 });
+
+Route::resource('/products', ProductController::class);

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
+use App\Models\ProductCategory;
 
 class ProductController extends Controller
 {
@@ -15,7 +16,17 @@ class ProductController extends Controller
      */
     public function index()
     {
-        //
+        $categoryName = '';
+        if(request('category')){
+            $category = ProductCategory::firstWhere('slug', request('category'));
+            $categoryName = $category->name;
+        }
+
+        return view('products.index',[
+            "products" => Product::latest()->filter(request(['search', 'category']))->paginate(6)->withQueryString(),
+            "categoryName" => $categoryName,
+            "categories" => ProductCategory::all()
+        ]);
     }
 
     /**

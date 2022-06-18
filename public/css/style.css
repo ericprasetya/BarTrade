@@ -6,6 +6,37 @@
   background-color: #00284E;
 }
 
+.text-blue{
+  color: #00284E;
+}
+
 .bg-tosca{
   background-color: #C1E3ED;
 }
+
+
+
+.headline-image{
+  /* transform: scale(0.8); */
+  width: 70%;
+  transition: 0.3s;
+}
+
+.headline:hover .headline-image{
+  transform: scale(1.2);
+}
+
+
+/*
+ * Extra utilities
+ */
+
+.flex-equal > * {
+  flex: 1;
+}
+@media (min-width: 768px) {
+  .flex-md-equal > * {
+    flex: 1;
+  }
+}
+
