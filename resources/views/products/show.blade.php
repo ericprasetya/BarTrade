@@ -38,8 +38,8 @@
           <form action="transaction/{{ $product->id }}" class="d-flex justify-content-center flex-column">
               <div class="form-floating">
                 <select class="form-select" id="barterType" aria-label="Floating label select example">
-                  <option value="full-barter" selected>Full Barter</option>
-                  <option value="trade-in">Trade in</option>
+                  <option value="Full Barter" selected>Full Barter</option>
+                  <option value="Trade In">Trade in</option>
                 </select>
                 <label for="barterType">Choose Barter Type</label>
               </div>

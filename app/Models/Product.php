@@ -34,4 +34,8 @@ class Product extends Model
             return $query->whereHas('category', fn ($query) => $query->where('slug', $category));
         });
     }
+
+    public function barters(){
+        return $this->hasOne(Barter::class);
+    }
 }
