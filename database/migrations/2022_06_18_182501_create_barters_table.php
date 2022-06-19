@@ -20,6 +20,7 @@ class CreateBartersTable extends Migration
             $table->foreignId('courier_id');
             $table->foreignId('payment_id');
             $table->string('type');
+            $table->string('address');
             $table->timestamps();
         });
     }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Barter;
 use App\Http\Requests\StoreBarterRequest;
 use App\Http\Requests\UpdateBarterRequest;
+use GuzzleHttp\Psr7\Request;
 
 class BarterController extends Controller
 {
@@ -15,7 +16,7 @@ class BarterController extends Controller
      */
     public function index()
     {
-        //
+        
     }
 
     /**
@@ -36,7 +37,24 @@ class BarterController extends Controller
      */
     public function store(StoreBarterRequest $request)
     {
-        //
+        dd($request);
+        // $validatedData = $request->validate([
+        //     'title' => 'required|max:255',
+        //     'slug' => 'required|unique:posts',
+        //     'image' => 'image|file|max:1024',
+        //     'category_id' => 'required',
+        //     'body' => 'required'
+        // ]);
+
+        // if($request->file('image')){
+        //     $validatedData['image'] = $request->file('image')->store('post-images');
+        // }
+
+        // $validatedData['user_id'] = auth()->user()->id;
+        // $validatedData['excerpt'] = Str::limit(strip_tags($request->body), 200);
+        // Barter::create($validatedData);
+
+        // return redirect('dashboard/posts')->with('success', 'New Post Successfully Added');
     }
 
     /**

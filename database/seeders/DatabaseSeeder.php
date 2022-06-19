@@ -29,16 +29,16 @@ class DatabaseSeeder extends Seeder
         User::factory(3)->create();
 
         ProductCategory::create([
-            'name' => 'Elektronik',
-            'slug' => 'elektronik',
+            'name' => 'Electronic',
+            'slug' => 'electronic',
         ]);
         ProductCategory::create([
-            'name' => 'Alat Dapur',
-            'slug' => 'alat-dapur',
+            'name' => 'Kitchen Set',
+            'slug' => 'kitchen-set',
         ]);
         ProductCategory::create([
-            'name' => 'Alat Olahraga',
-            'slug' => 'alat-olahraga'
+            'name' => 'Sports Equipment',
+            'slug' => 'sports-equipment'
         ]); 
         ProductCategory::create([
             'name' => 'Fashion',
@@ -75,6 +75,7 @@ class DatabaseSeeder extends Seeder
             'payment_id' => '1',
             'courier_id' => '1',
             'type' => 'Full Barter',
+            'address' => 'jalan patimura nomor 20, Denpasar',
         ]);
     }
 }

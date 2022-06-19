@@ -12,14 +12,6 @@ class Barter extends Model
         'id'
     ];
 
-    public function seller(){
-        return $this->belongsTo(User::class, 'seller_id');
-    }
-
-    public function buyer(){
-        return $this->belongsTo(User::class, 'buyer_id');
-    }
-
     public function sellerProduct(){
         return $this->belongsTo(Product::class, 'seller_product_id');
     }

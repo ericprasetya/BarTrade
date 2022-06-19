@@ -3,11 +3,11 @@
 @section('container')
   <div class="container d-flex my-5 justify-content-around">
     <div style="max-height: 500px; overflow:hidden;" class="rounded-4 shadow" >
-    @if ($product->image)
-      <img src="{{ asset('storage/'. $product->user->username . '/' . $product->image) }}" class="img-fluid" alt="{{ $product->category->name }}">
-    @else
-      <img src="https://source.unsplash.com/500x500?{{ $product->category->name }}" class="img-fluid" alt="{{ $product->category->name }}">
-    @endif
+      @if ($product->image)
+        <img src="{{ asset('storage/'. $product->user->username . '/' . $product->image) }}" class="img-fluid" alt="{{ $product->category->name }}">
+      @else
+        <img src="https://source.unsplash.com/500x500?{{ $product->category->name }}" class="img-fluid" alt="{{ $product->category->name }}">
+      @endif
     </div>
 
     <div class="" style="width: 400px">
@@ -35,16 +35,17 @@
           Barter Now!
         </div>
         <div class="card-body">
-          <form action="transaction/{{ $product->id }}" class="d-flex justify-content-center flex-column">
+          <form action="{{ $product->id }}/transaction" class="d-flex justify-content-center flex-column" method="GET">
+              @csrf
               <div class="form-floating">
-                <select class="form-select" id="barterType" aria-label="Floating label select example">
-                  <option value="Full Barter" selected>Full Barter</option>
-                  <option value="Trade In">Trade in</option>
+                <select class="form-select" id="barterType" aria-label="Floating label select example" name="type">
+                  <option value="FullBarter" selected>Full Barter</option>
+                  <option value="TradeIn">Trade in</option>
                 </select>
                 <label for="barterType">Choose Barter Type</label>
               </div>
               <div class="form-check mt-3">
-                <input class="form-check-input" type="checkbox" value="" id="agree">
+                <input class="form-check-input" type="checkbox" value="" id="agree" name="agree" required>
                 <label class="form-check-label" for="agree">
                   I already discuss barter with the seller and both seller and me agree with the chosen barter type
                 </label>

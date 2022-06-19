@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BarterController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\RegisterController;
@@ -30,4 +31,11 @@ Route::middleware('guest')->group(function(){
 });
 Route::resource('/products', ProductController::class);
 Route::post('/logout', [LoginController::class, 'logout']);
+
+
+Route::middleware('auth')->group(function(){
+    Route::get('/products/{product}/transaction', [ProductController::class, 'transaction']);
+    Route::post('/transaction', [BarterController::class, 'store']);
+});
+
 

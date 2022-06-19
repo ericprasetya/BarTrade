@@ -5,7 +5,11 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
+use App\Models\Courier;
+use App\Models\Payment;
 use App\Models\ProductCategory;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\Auth;
 
 class ProductController extends Controller
 {
@@ -22,8 +26,13 @@ class ProductController extends Controller
             $categoryName = $category->name;
         }
 
+        $products = Product::latest()->filter(request(['search', 'category']))->paginate(6)->withQueryString();
+        if(Auth::check()){
+            $products =  Product::latest()->filter(request(['search', 'category']))->where('user_id', 'not like', auth()->user()->id)->paginate(6)->withQueryString();
+        }
+
         return view('products.index',[
-            "products" => Product::latest()->filter(request(['search', 'category']))->paginate(6)->withQueryString(),
+            "products" => $products,
             "categoryName" => $categoryName,
             "categories" => ProductCategory::all()
         ]);
@@ -62,6 +71,22 @@ class ProductController extends Controller
             "product" => $product,
             "categoryName" => "",
             "categories" => ProductCategory::all()
+        ]);
+    }
+
+    public function transaction(Product $product)
+    {
+        $type = request('type');
+        $buyerProducts = Product::where('user_id', auth()->user()->id)->get();
+        
+        return view('products.transaction', [
+            "product" => $product,
+            "categoryName" => "",
+            "categories" => ProductCategory::all(),
+            "type" => $type,
+            "buyerProducts" => $buyerProducts,
+            "payments" => Payment::all(),
+            "couriers" => Courier::all(),
         ]);
     }
 
