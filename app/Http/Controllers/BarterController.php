@@ -7,6 +7,8 @@ use App\Http\Requests\StoreBarterRequest;
 use App\Http\Requests\UpdateBarterRequest;
 use GuzzleHttp\Psr7\Request;
 
+use function PHPSTORM_META\type;
+
 class BarterController extends Controller
 {
     /**
@@ -37,24 +39,37 @@ class BarterController extends Controller
      */
     public function store(StoreBarterRequest $request)
     {
-        dd($request);
-        // $validatedData = $request->validate([
-        //     'title' => 'required|max:255',
-        //     'slug' => 'required|unique:posts',
-        //     'image' => 'image|file|max:1024',
-        //     'category_id' => 'required',
-        //     'body' => 'required'
-        // ]);
-
-        // if($request->file('image')){
-        //     $validatedData['image'] = $request->file('image')->store('post-images');
-        // }
-
-        // $validatedData['user_id'] = auth()->user()->id;
-        // $validatedData['excerpt'] = Str::limit(strip_tags($request->body), 200);
-        // Barter::create($validatedData);
-
-        // return redirect('dashboard/posts')->with('success', 'New Post Successfully Added');
+        // dd($request);
+        $validatedData = $request->validate([
+            'buyer_product_id' => 'required|exists:products,id|different:seller_product_id',
+            'courier_id' => 'required|exists:couriers,id',
+            'seller_product_id' => 'required|exists:products,id|different:buyer_product_id',
+            'type' => 'required|in:FullBarter,TradeIn',
+            'name' => 'required',
+            'username' => 'required',
+            'email' => 'required',
+            'address' => 'required|min:20',
+            'payment_id' => 'required|exists:payments,id',
+        ]);
+        if($validatedData['type'] == "FullBarter"){
+            $validatedData['type'] = "Full Barter";
+        }else{
+            $validatedData['type'] = "Trade In";
+        }
+        
+        $barterData = collect($validatedData)->only([
+            'buyer_product_id',
+            'seller_product_id',
+            'courier_id',
+            'payment_id',
+            'type',
+            'address',
+        ])->toArray();
+        
+        // dd($barterData);
+        Barter::create($barterData);
+        return redirect('/');
+        // return redirect('dashboard/transactions')->with('success', 'New Post Successfully Added');
     }
 
     /**

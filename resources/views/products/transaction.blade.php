@@ -25,6 +25,11 @@
               <div>
                 <h6 class="my-0">{{ $product->name }}</h6>
                 <small class="text-muted">By {{ $product->user->name }}</small>
+                @error('seller_product_id')
+                <div class="invalid-feedback">
+                  {{ $message }}
+                </div>
+                @enderror
               </div>
               <span class="text-muted">Rp {{ $product->value }}</span>
             </div>
@@ -44,6 +49,11 @@
                 @endforeach
               </select>
               <small class="text-muted">By {{ auth()->user()->name }}</small>
+              @error('buyer_product_id')
+              <div class="invalid-feedback">
+                {{ $message }}
+              </div>
+              @enderror
             </div>
             <span class="text-muted" id="buyerProductValue">Rp 0</span>
           </li>
@@ -61,6 +71,11 @@
                   <option value="{{ $courier->id }}" data-fee="{{ $courier->fee }}">{{ $courier->name }}</option>
                 @endforeach
               </select>
+              @error('courier_id')
+              <div class="invalid-feedback">
+                {{ $message }}
+              </div>
+              @enderror
             </div>
             <div>
               <span class="text-muted">Rp </span><span class="text-muted" id="courierFee">0</span>
@@ -89,38 +104,54 @@
         <div class="form-transaction">
           <input type="hidden" name="seller_product_id" value="{{ $product->id }}" id="seller-product-id">
           <input type="hidden" name="type" value="{{ $type }}">
-          {{-- <input type="hidden" name="buyer-product-id" id="buyer-product-id" value=""> --}}
+
           <div class="row g-3">
             <div class="col-12">
               <label for="name" class="form-label">Name</label>
-              <input type="text" class="form-control" id="name" placeholder="Your name" name="name" value="{{ old('name', auth()->user()->name) }}" readonly required>
+              <input type="text" class="form-control @error('name')
+              is-invalid
+              @enderror" id="name" placeholder="Your name" name="name" value="{{ old('name', auth()->user()->name) }}" readonly required>
+              @error('name')
               <div class="invalid-feedback">
-                Please enter a valid email address for shipping updates.
+                {{ $message }}
               </div>
+              @enderror
             </div>
 
             <div class="col-12">
               <label for="username" class="form-label">Username</label>
-              <input type="text" class="form-control" id="username" placeholder="Username" name="username" value="{{ old('username', auth()->user()->username) }}" readonly required>
-              <div class="invalid-feedback">
-                  Your username is required.
-              </div>
+              <input type="text" class="form-control @error('username')
+              is-invalid 
+            @enderror" id="username" placeholder="Username" name="username" value="{{ old('username', auth()->user()->username) }}" readonly required>
+            @error('username')
+            <div class="invalid-feedback">
+              {{ $message }}
+            </div>
+            @enderror
             </div>
 
             <div class="col-12">
               <label for="email" class="form-label">Email</label>
-              <input type="email" class="form-control" id="email" placeholder="you@example.com" name="email" value="{{ old('email', auth()->user()->email) }}" name="email" readonly required>
+              <input type="email" class="form-control @error('email')
+              is-invalid 
+            @enderror" id="email" placeholder="you@example.com" name="email" value="{{ old('email', auth()->user()->email) }}" name="email" readonly required>
+              @error('email')
               <div class="invalid-feedback">
-                Please enter a valid email address for shipping updates.
+                {{ $message }}
               </div>
+              @enderror
             </div>
 
             <div class="col-12">
               <label for="address" class="form-label">Address</label>
-              <input type="text" class="form-control" id="address" placeholder="Jalan mawar 1 Jakarta Pusat" name="address" value="{{ old('address') }}" required>
-              <div class="invalid-feedback">
-                Please enter your shipping address.
-              </div>
+              <input type="text" class="form-control @error('address')
+              is-invalid 
+            @enderror" id="address" placeholder="Jalan mawar 1 Jakarta Pusat" name="address" value="{{ old('address') }}" required>
+            @error('address')
+            <div class="invalid-feedback">
+              {{ $message }}
+            </div>
+            @enderror
             </div>
 
             <div class="col-md-5">
@@ -129,9 +160,11 @@
                 <option value="FullBarter">Full Barter</option>
                 <option value="TradeIn">Trade In</option>
               </select>
+              @error('type')
               <div class="invalid-feedback">
-
+                {{ $message }}
               </div>
+              @enderror
             </div>
 
           </div>
@@ -148,6 +181,11 @@
             </div>
             @endforeach
           </div>
+          @error('payment')
+          <div class="invalid-feedback">
+            {{ $message }}
+          </div>
+          @enderror
 
           {{-- <div class="row gy-3">
             <div class="col-md-6">

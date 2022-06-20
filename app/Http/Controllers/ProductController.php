@@ -76,6 +76,10 @@ class ProductController extends Controller
 
     public function transaction(Product $product)
     {
+        
+        if($product->user->id == auth()->user()->id){
+            return redirect('/');
+        }
         $type = request('type');
         $buyerProducts = Product::where('user_id', auth()->user()->id)->get();
         

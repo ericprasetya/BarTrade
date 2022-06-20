@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\BarterController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\RegisterController;
@@ -38,4 +39,4 @@ Route::middleware('auth')->group(function(){
     Route::post('/transaction', [BarterController::class, 'store']);
 });
 
-
+Route::get('/dashboard', [DashboardController::class, 'index']);
