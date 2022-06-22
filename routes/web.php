@@ -5,8 +5,11 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\UserController;
 use App\Models\ProductCategory;
 use Illuminate\Support\Facades\Route;
+
+use function PHPUnit\Framework\returnSelf;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,5 +41,13 @@ Route::middleware('auth')->group(function(){
     Route::get('/products/{product}/transaction', [ProductController::class, 'transaction']);
     Route::post('/transaction', [BarterController::class, 'store']);
 });
-
+Route::get('/aboutUs', function(){
+    return view('aboutUs',[
+        "categories" => ProductCategory::all(),
+        "categoryName" => ""
+    ]);
+});
 Route::get('/dashboard', [DashboardController::class, 'index']);
+Route::get('/user/{user:username}/edit', [UserController::class, 'edit']);
+Route::put('/user/{user:username}', [UserController::class, 'update']);
+Route::get('/barter/{barter}', [BarterController::class, 'show']);

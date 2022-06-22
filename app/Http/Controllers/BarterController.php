@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Barter;
 use App\Http\Requests\StoreBarterRequest;
 use App\Http\Requests\UpdateBarterRequest;
+use App\Models\ProductCategory;
 use GuzzleHttp\Psr7\Request;
 
 use function PHPSTORM_META\type;
@@ -80,7 +81,12 @@ class BarterController extends Controller
      */
     public function show(Barter $barter)
     {
-        //
+        
+        return view('dashboard.barterDetail', [
+            "categories" => ProductCategory::all(),
+            "barter" => $barter,
+            "categoryName" => ""
+        ]);
     }
 
     /**

@@ -45,7 +45,7 @@
         <div class="bg-light pt-3 px-3 pt-md-5 px-md-5 text-center text-blue overflow-hidden headline" style="height: 600px">
             <div class="my-3 p-3">
                 <h2 class="display-5">Discover Us</h2>
-                <a class="lead text-decoration-none" href="/about-us">Go to about us page >></a>
+                <a class="lead text-decoration-none" href="/aboutUs">Go to about us page >></a>
             </div>
             <div class="bg-blue shadow-sm mx-auto overflow-hidden" style="width: 80%; height: 400px; border-radius: 21px 21px 0 0;">
                 <img src="/image/about_us.svg" alt="" class="mt-5 headline-image">
