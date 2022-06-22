@@ -9,7 +9,7 @@
         <div class="card shadow-sm">
           <div class="position-absolute px-3 py-2 text-white" style="background-color: rgba(0,0,0,0.7);"><a href="/products?category={{ $product->category->slug }}" class="text-decoration-none text-white">{{ $product->category->name }}</a> </div>
           @if ($product->image)
-            <img src="{{ asset('storage/'.$product->user->userName.'/'.$product->image) }}" alt=""  class="card-img-top" height="400">
+            <img src="{{ asset('storage/'.$product->image) }}" alt=""  class="card-img-top" height="400">
           @else
             <img src="https://source.unsplash.com/400x400?{{ $product->category->name }}" class="card-img-top" alt="..." height="400">
           @endif

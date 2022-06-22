@@ -18,30 +18,25 @@
           </form>
           <ul class="navbar-nav ms-auto">
               @auth
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  Welcome back, {{ auth()->user()->name }}
+              <li class="nav-item">
+                <a href="/products/create" class="nav-link">
+                  <button class="btn btn-outline-info {{ Request::is('products/create') ? 'active' : '' }}">Offer New Product</button>
                 </a>
-                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <li><a class="dropdown-item" href="/dashboard"><i class="bi bi-layout-text-window-reverse"></i> My Dashboard</a></li>
-                  <li><hr class="dropdown-divider"></li>
-                  <li>
-                    <form action="/logout" method="POST">
-                      @csrf
-                      <button type="submit" class="dropdown-item"><i class="bi bi-box-arrow-right"></i> Logout</button>
-                    </form> 
-                  </li>
-                </ul>
+              </li>
+              <li class="nav-item">
+                <a href="/dashboard" class="nav-link">
+                  <button class=" btn btn-outline-light {{ Request::is('dashboard') ? 'active' : '' }}">Dashboard</button>
+                </a>
               </li>
               @else
               <li class="nav-item">
                 <a href="/login" class="nav-link">
-                  <button class="btn btn-success {{ Request::is('login') ? 'active' : '' }}">Login</button>
+                  <button class="btn btn-outline-info {{ Request::is('login') ? 'active' : '' }}">Login</button>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="/register" class="nav-link">
-                  <button class=" btn btn-outline-success {{ Request::is('register') ? 'active' : '' }}">Register</button>
+                  <button class=" btn btn-outline-primary {{ Request::is('register') ? 'active' : '' }}">Register</button>
                 </a>
               </li>
             </ul>

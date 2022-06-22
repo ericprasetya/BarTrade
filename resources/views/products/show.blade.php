@@ -4,7 +4,7 @@
   <div class="container d-flex my-5 justify-content-around">
     <div style="max-height: 500px; overflow:hidden;" class="rounded-4 shadow" >
       @if ($product->image)
-        <img src="{{ asset('storage/'. $product->user->username . '/' . $product->image) }}" class="img-fluid" alt="{{ $product->category->name }}">
+        <img src="{{ asset('storage/'. $product->image) }}" class="img-fluid" alt="{{ $product->category->name }}">
       @else
         <img src="https://source.unsplash.com/500x500?{{ $product->category->name }}" class="img-fluid" alt="{{ $product->category->name }}">
       @endif

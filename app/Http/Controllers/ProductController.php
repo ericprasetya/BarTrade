@@ -8,8 +8,8 @@ use App\Http\Requests\UpdateProductRequest;
 use App\Models\Courier;
 use App\Models\Payment;
 use App\Models\ProductCategory;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
@@ -45,7 +45,10 @@ class ProductController extends Controller
      */
     public function create()
     {
-        //
+        return view('products.create', [
+            "categoryName" => "",
+            "categories" => ProductCategory::all()
+        ]);
     }
 
     /**
@@ -56,7 +59,22 @@ class ProductController extends Controller
      */
     public function store(StoreProductRequest $request)
     {
-        //
+        $validatedData = $request->validate([
+            'name' => 'required|max:255',
+            'image' => 'image|file|max:5120',
+            'category_id' => 'required',
+            'description' => 'required|max:255',
+            'value' => 'required|numeric|min:10000',
+        ]);
+
+        if($request->file('image')){
+            $validatedData['image'] = $request->file('image')->store(auth()->user()->username);
+        }
+
+        $validatedData['user_id'] = auth()->user()->id;
+        Product::create($validatedData);
+
+        return redirect('/dashboard')->with('success', 'New Product Successfully Added');
     }
 
     /**
@@ -102,7 +120,14 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
-        //
+        if($product->user->id !== auth()->user()->id) {
+            abort(403);
+        }
+        return view('products.edit', [
+            "categoryName" => "",
+            'categories' => ProductCategory::all(),
+            'product' => $product
+        ]);
     }
 
     /**
@@ -114,7 +139,25 @@ class ProductController extends Controller
      */
     public function update(UpdateProductRequest $request, Product $product)
     {
-        //
+        $validatedData = $request->validate([
+            'name' => 'required|max:255',
+            'image' => 'image|file|max:5120',
+            'category_id' => 'required',
+            'description' => 'required|max:255',
+            'value' => 'required|numeric|min:10000',
+        ]);
+
+        if($request->file('image')){
+            if($product->image){
+                Storage::delete($product->image);
+            }
+            $validatedData['image'] = $request->file('image')->store(auth()->user()->username);
+        }
+
+        $validatedData['user_id'] = auth()->user()->id;
+        Product::where('id', $product->id)->update($validatedData);
+
+        return redirect('/dashboard')->with('success', 'Product Successfully Updated');
     }
 
     /**
@@ -125,6 +168,11 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
-        //
+        if($product->image){
+            Storage::delete($product->image);
+        }
+        Product::destroy($product->id);
+
+        return redirect('dashboard')->with('success', 'Product has been deleted');
     }
 }

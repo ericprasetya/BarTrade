@@ -17,7 +17,7 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        $products = Product::where('user_id', auth()->user()->id)->paginate(3)->withQueryString();
+        $products = Product::where('user_id', auth()->user()->id)->latest()->paginate(3)->withQueryString();
         $transactions = Barter::whereHas('buyerProduct', function(Builder $query){
             $query->where('user_id', auth()->user()->id);
         })->orWhereHas('sellerProduct',  function(Builder $query){

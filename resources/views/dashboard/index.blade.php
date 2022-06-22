@@ -3,28 +3,22 @@
 @section('container')
 <div class="row px-5 mx-5 py-5">
   <div class="card col-3 p-0 mx-5" style="height: fit-content">
-    <div class="card-header">
-      <div class="dropdown">
-        <a href="#" class="d-flex align-items-center link-dark text-decoration-none dropdown-toggle" id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="false">
-          <img src="https://github.com/mdo.png" alt="" width="32" height="32" class="rounded-circle me-2">
-          <strong>mdo</strong>
-        </a>
-        <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser2">
-          <li><a class="dropdown-item" href="#">New project...</a></li>
-          <li><a class="dropdown-item" href="#">Settings</a></li>
-          <li><a class="dropdown-item" href="#">Profile</a></li>
-          <li><hr class="dropdown-divider"></li>
-          <li><a class="dropdown-item" href="#">Sign out</a></li>
-        </ul>
-      </div>
+    <div class="card-header bg-blue">
+      <a href="#" class="d-flex align-items-center link-light text-decoration-none">
+        <img src="https://github.com/mdo.png" alt="" width="32" height="32" class="rounded-circle me-2">
+        <strong>mdo</strong>
+      </a>
     </div>
     <ul class="list-group list-group-flush">
-      <li class="list-group-item"><a href="#" class="card-link">Dashboard</a></li>
-      <li class="list-group-item"><a href="#" class="card-link">Edit Profile</a></li>
-      <li class="list-group-item"><a href="#" class="card-link">Add new product</a></li>
+      <li class="list-group-item"><a href="/dashboard" class="card-link">Dashboard</a></li>
+      <li class="list-group-item"><a href="" class="card-link">Edit Profile</a></li>
+      <li class="list-group-item"><a href="/products/create" class="card-link">Offer New Product</a></li>
     </ul>
     <div class="card-body">
-      <a href="#" class="card-link">Logout</a>
+      <form action="/logout" method="POST">
+        @csrf
+        <button type="submit" class="btn btn-danger"><i class="bi bi-box-arrow-right"></i> Logout</button>
+      </form> 
     </div>
   </div>
 
@@ -40,19 +34,21 @@
     <div class="tab-content" id="myTabContent">
       <div class="tab-pane fade show active" id="products-tab-pane" role="tabpanel" aria-labelledby="products-tab" tabindex="0">
         @if (session()->has('success'))
-          <div class="alert alert-success col-lg-8" role="alert">
+          <div class="alert alert-success mt-3" role="alert">
             {{ session('success') }}
           </div>
         @endif
         
-        <a href="/dashboard/transactions/create" class="btn btn-primary my-3">Create New Product</a>
+        <a href="/products/create" class="btn btn-info my-3">Offer New Product</a>
         @foreach ($products as $product)
           <div class="card mb-3 flex-row" style="height: 300px">
-              @if ($product->image)
-                <img src="{{ asset('storage/'. $product->user->username . '/' . $product->image) }}" class="img-fluid" alt="{{ $product->category->name }}">
-              @else
-                <img src="https://source.unsplash.com/300x300?{{ $product->category->name }}" class="img-fluid" alt="{{ $product->category->name }}">
-              @endif
+            @if ($product->image)
+            <div class="overflow-hidden flex-shrink-0" style="width: 300px">
+              <img src="{{ asset('storage/'. $product->image) }}" class="h-100 d-block mx-auto" alt="{{ $product->category->name }}" >
+            </div>
+            @else
+              <img src="https://source.unsplash.com/300x300?{{ $product->category->name }}" class="img-fluid" alt="{{ $product->category->name }}">
+            @endif
               <div class="card-body flex-column position-relative">
                 <h5 class="card-title">{{ $product->name }}</h5>
                 <p class="card-text ">Value: Rp {{ $product->value }}</p>
@@ -62,8 +58,14 @@
                 <div class="d-flex justify-content-between position-absolute bottom-0 w-100">
                   <p class="card-text"><small class="text-muted">Created {{ $product->created_at->diffForHumans() }}</small></p>
                   <div class="me-5 mb-2">
-                    <a href="#" class="btn btn-warning">Edit</a>
-                    <a href="#" class="btn btn-danger">Delete</a>
+                    <a href="/products/{{ $product->id }}/edit" class="btn btn-warning"><i class="bi bi-pencil"></i> Edit</a>
+                    <form method="POST" action="/products/{{ $product->id }}" class="d-inline">
+                      @method('delete')
+                      @csrf
+                      <button class="btn btn-danger" onclick="return confirm('Are you sure')">
+                        <i class="bi bi-trash"></i> Delete
+                      </button>
+                    </form>
                   </div>
                 </div>
             </div>

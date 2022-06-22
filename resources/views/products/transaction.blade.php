@@ -16,7 +16,7 @@
           <li class="list-group-item lh-sm">
             <div style="max-height: 200px; overflow:hidden;" class="d-flex justify-content-center mb-2 pb-2 border-bottom" >
               @if ($product->image)
-                <img src="{{ asset('storage/'. $product->user->username . '/' . $product->image) }}" class="img-fluid rounded" alt="{{ $product->category->name }}">
+                <img src="{{ asset('storage/' . $product->image) }}" class="img-fluid rounded" alt="{{ $product->category->name }}">
               @else
                 <img src="https://source.unsplash.com/200x200?{{ $product->category->name }}" class="img-fluid rounded" alt="{{ $product->category->name }}">
               @endif
@@ -90,7 +90,13 @@
           </li>
           @endif
           <li class="list-group-item d-flex justify-content-between">
-            <span>Total (USD)</span>
+            <span>Platform fee</span>
+            <div>
+              <span class="text-muted">Rp </span><span class="text-muted" id="platformFee">10000</span>
+            </div>
+          </li>
+          <li class="list-group-item d-flex justify-content-between">
+            <span>Total (IDR)</span>
             <div>
               <strong>Rp </strong><strong id="total">0</strong>
             </div>
@@ -223,7 +229,7 @@
   var courierSelector = document.getElementById("courier");
   var courierFee = document.getElementById("courierFee");
   document.getElementById("type").value = type;
-  
+  var platformFee = document.getElementById("platformFee");
   // document.getElementById("buyer-product-id").value = buyerProductSelector.getAttribute('data-id');
 
   if(type == "TradeIn"){
@@ -234,15 +240,15 @@
     buyerProductValue.innerHTML = "Rp " + $(this).find("option:selected").data('value');
     if(type == "TradeIn"){
       priceDiff.innerHTML = ({{ $product->value }} - $(this).find("option:selected").data('value'))
-      total.innerHTML = (parseInt(priceDiff.innerHTML) + parseInt(courierFee.innerHTML));
+      total.innerHTML = (parseInt(priceDiff.innerHTML) + parseInt(courierFee.innerHTML) + parseInt(platformFee.innerHTML));
     }
   })
 
   $('#courier').on('change', function(){
     courierFee.innerHTML =  $(this).find("option:selected").data('fee');
-    total.innerHTML =  $(this).find("option:selected").data('fee');
+    total.innerHTML =  $(this).find("option:selected").data('fee') + parseInt(platformFee.innerHTML);
     if(type == "TradeIn"){
-      total.innerHTML = (parseInt(priceDiff.innerHTML) + parseInt(courierFee.innerHTML));
+      total.innerHTML = (parseInt(priceDiff.innerHTML) + parseInt(courierFee.innerHTML) + parseInt(platformFee.innerHTML));
     }
   })
 
