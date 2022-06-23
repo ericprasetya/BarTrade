@@ -23,6 +23,8 @@ class DashboardController extends Controller
         })->orWhereHas('sellerProduct',  function(Builder $query){
             $query->where('user_id', auth()->user()->id);
         })->get();
+
+        // dd($barters);
         return view('dashboard.index', [
             "products" => $products,
             "categories" => ProductCategory::all(),

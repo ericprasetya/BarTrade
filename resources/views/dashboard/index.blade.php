@@ -74,6 +74,7 @@
               @else
                 <td>{{ $barter->sellerProduct->user->name }}</td>
               @endif
+
               <td>{{ $barter->buyerProduct->name }}</td>
               @if ($barter->buyerProduct->user->username == auth()->user()->username)
                 <td><strong>YOU</strong></td>

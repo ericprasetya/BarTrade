@@ -15,7 +15,7 @@
           @endif
           <div class="card-body">
             <h5 class="card-title">{{ $product->name }}</h5>
-            <p class="card-text">Value : <strong>$ {{ $product->value }}</strong></p>
+            <p class="card-text">Value : <strong>Rp {{ $product->value }}</strong></p>
             <p class="card-text">By : {{ $product->user->name }}</p>
             <div class="d-flex justify-content-between align-items-center">
               <a href="/products/{{ $product->id }}" class="btn btn-primary">View Details</a>

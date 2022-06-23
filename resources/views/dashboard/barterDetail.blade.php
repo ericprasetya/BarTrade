@@ -101,14 +101,13 @@
   var total = document.getElementById("total");
   var platformFee = document.getElementById("platformFee");
 
-  if('{{ $barter->type }}' == "TradeIn"){
+  total.innerHTML =  {{ $barter->courier->fee }} + parseInt(platformFee.innerHTML);
+  if('{{ $barter->type }}' == "Trade In"){
     var priceDiff = document.getElementById("priceDifference");
     priceDiff.innerHTML = '{{ $barter->sellerProduct->value - $barter->buyerProduct->value}}'
     total.innerHTML = {{ $barter->courier->fee }} + parseInt(priceDiff.innerHTML) + parseInt(platformFee.innerHTML);
   }
 
-
-  total.innerHTML =  {{ $barter->courier->fee }} + parseInt(platformFee.innerHTML);
 
 </script>
 @endsection

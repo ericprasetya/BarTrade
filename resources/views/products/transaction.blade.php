@@ -14,9 +14,9 @@
         </h4>
         <ul class="list-group mb-3">
           <li class="list-group-item lh-sm">
-            <div style="max-height: 200px; overflow:hidden;" class="d-flex justify-content-center mb-2 pb-2 border-bottom" >
+            <div style="height: 200px; overflow:hidden;" class="d-flex justify-content-center mb-2 pb-2 border-bottom" >
               @if ($product->image)
-                <img src="{{ asset('storage/' . $product->image) }}" class="img-fluid rounded" alt="{{ $product->category->name }}">
+                <img src="{{ asset('storage/' . $product->image) }}" class="img-fluid h-100 rounded" alt="{{ $product->category->name }}">
               @else
                 <img src="https://source.unsplash.com/200x200?{{ $product->category->name }}" class="img-fluid rounded" alt="{{ $product->category->name }}">
               @endif
@@ -193,24 +193,6 @@
           </div>
           @enderror
 
-          {{-- <div class="row gy-3">
-            <div class="col-md-6">
-              <label for="card-name" class="form-label">Name on card</label>
-              <input type="text" class="form-control" id="card-name" placeholder="" required name="card-name" value="{{ old('card-name') }}">
-              <small class="text-muted">Full name as displayed on card</small>
-              <div class="invalid-feedback">
-                Name on card is required
-              </div>
-            </div>
-
-            <div class="col-md-6">
-              <label for="card-number" class="form-label">Bank account number</label>
-              <input type="text" class="form-control" id="card-number" placeholder="" required value="{{ old('card-number') }}">
-              <div class="invalid-feedback">
-                Credit card number is required
-              </div>
-            </div>
-          </div> --}}
 
           <hr class="my-4">
 
