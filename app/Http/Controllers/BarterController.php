@@ -69,8 +69,7 @@ class BarterController extends Controller
         
         // dd($barterData);
         Barter::create($barterData);
-        return redirect('/');
-        // return redirect('dashboard/transactions')->with('success', 'New Post Successfully Added');
+        return redirect('/')->with("success", "Transaction Success! Please Check it in Your Dashboard");
     }
 
     /**

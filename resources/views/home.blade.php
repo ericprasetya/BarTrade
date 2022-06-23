@@ -54,5 +54,27 @@
     </div>
     
 </section>
+@if (session()->has('success'))
 
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+            <div class="alert alert-success d-flex align-items-center" role="alert">
+                <i class="bi bi-check-lg me-2"></i>
+                <div>
+                    {{ session('success') }}
+                </div>
+            </div>
+    </div>
+</div>
+@endif
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script type="text/javascript">
+
+if({{ session()->has('success') }}){
+    $(window).on('load', function() {
+        $('#exampleModal').modal('show');
+    });
+}
+</script>
 @endsection
