@@ -1,7 +1,7 @@
 # BarTrade
 
 ## About
-this is my project for Software Engineering Class in Binus University on my fourth semester. I created a web application called BarTrade. BarTrade is a platform that made its users can barter their unused product with other user's product. They can discuss about the product value and fill the value gap with money. The design is created using canva and figma.
+This is my project for Software Engineering Class in Binus University on my fourth semester. I created a web application called BarTrade. BarTrade is a platform that made its users can barter their unused product with other user's product. They can discuss about the product value and fill the value gap with money. The design is created using canva and figma.
 
 ## Technology
 - [laravel version 9](https://laravel.com/)
