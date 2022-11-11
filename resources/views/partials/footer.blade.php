@@ -14,8 +14,8 @@
       <div class="">
         <h5>Follow Us</h5>
         <div class="d-flex">
-          <a href="https://www.instagram.com/" class="me-3"><i class="bi bi-instagram" style="font-size: 40px"></i></a>
-          <a href="https://www.facebook.com/" class="ms-3"><i class="bi bi-facebook" style="font-size: 40px"></i></a>
+          <a href="https://www.instagram.com/bartrade.id" target="_blank" class="me-3"><i class="bi bi-instagram" style="font-size: 40px"></i></a>
+          <a href="https://www.facebook.com/" class="ms-3"><i class="bi bi-youtube" style="font-size: 40px"></i></a>
         </div>
       </div>
     </div>
